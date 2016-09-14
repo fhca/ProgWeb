@@ -18,7 +18,7 @@
 			case "multiplicación": resultado = v0 + " * " + v1 + " = " + (v0 * v1); break;
 			case "división": resultado = v0 + " / " + v1 + " = " + (v0 / v1); break;
 		}
-		historia += "\n" + resultado;
+		historia = resultado + "\n" + historia;
 	} 
 %>
 
