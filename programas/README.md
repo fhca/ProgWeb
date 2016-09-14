@@ -1,5 +1,5 @@
 [13 de sep]
-Ya jaló el [vista.jsp](vista.jsp) del proyecto `sumadora.war`. El código fuente mejorado es el que se muestra directo (fuera del war). Era un poco mas sencillo de lo que pensabamos. El punto es hacer las operaciones antes de imprimir el HTML y nos evitamos varias cosas.
+Ya jaló el [vista.jsp](vista.jsp) del proyecto `sumadora.war`. El código fuente mejorado es el que se muestra directo (luego puedes incorporárselo al `war`). Era un poco mas sencillo de lo que pensabamos. El punto es hacer las operaciones antes de imprimir el HTML y nos evitamos varias cosas.
 
 El programa funciona así:
 
