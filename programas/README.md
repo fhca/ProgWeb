@@ -1,3 +1,6 @@
+[21 de sep]
+(recepcion_de_tareas.war)[recepcion_de_tareas.war] tiene los archivos de inicio del proyecto que estamos haciendo. Por si no has visto como, puedes desempaquetarlo con `jar xvf recepcion_de_tareas.war`.
+
 [13 de sep]
 Ya jaló el [vista.jsp](vista.jsp) del proyecto `sumadora.war`. El código fuente mejorado es el que se muestra directo (luego puedes incorporárselo al `war`). Era un poco mas sencillo de lo que pensabamos. El punto es hacer las operaciones antes de imprimir el HTML y nos evitamos varias cosas.
 
