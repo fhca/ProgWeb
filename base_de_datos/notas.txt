@@ -1,0 +1,50 @@
+Pruebas con Postgresql
+- [ ] Instalación de Postgresql
+- [ ] createdb pruebadb (crea la base de datos)
+- [ ] psql pruebadb (entrar desde el cliente psql)
+- [ ] crear tablas 
+CREATE TABLE estudiante (
+  nombre VARCHAR(200),
+  matricula VARCHAR(12) PRIMARY KEY
+);
+
+CREATE TABLE colegio (
+  nombre VARCHAR(200),
+  id SERIAL
+);
+
+CREATE TABLE plantel (
+  nombre VARCHAR(200),
+  id SERIAL PRIMARY KEY
+);
+
+CREATE TABLE materia (
+  nombre VARCHAR(200), semestre INTEGER,
+  id SERIAL PRIMARY KEY
+);
+
+- [ ] Usar \dt para ver un listado de las tablas creadas hasta ahora
+- [ ] DROP TABLE colegio (borra una tabla)
+CREATE TABLE colegio (
+  nombre VARCHAR(200),
+  id SERIAL PRIMARY KEY
+);
+
+- [ ] \dS estudiante (muestra estructura interna de la tabla estudiante)
+
+CREATE TABLE carrera (
+  id SERIAL PRIMARY KEY,
+  nombre VARCHAR(200),
+  colegio SERIAL REFERENCES colegio, plantel SERIAL REFERENCES plantel
+);
+
+CREATE TABLE plan (
+  id SERIAL PRIMARY KEY,
+  carrera SERIAL REFERENCES carrera, materia SERIAL REFERENCES materia
+);
+
+CREATE TABLE cursa (
+  id SERIAL PRIMARY KEY,
+  estudiante VARCHAR(12) REFERENCES estudiante, materialplan SERIAL REFERENCES plan
+);
+
