@@ -1,0 +1,683 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.5.4
+-- Dumped by pg_dump version 9.5.4
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: carrera; Type: TABLE; Schema: public; Owner: fhca
+--
+
+CREATE TABLE carrera (
+    id integer NOT NULL,
+    nombre character varying(200),
+    colegio integer NOT NULL,
+    plantel integer NOT NULL
+);
+
+
+ALTER TABLE carrera OWNER TO fhca;
+
+--
+-- Name: carrera_colegio_seq; Type: SEQUENCE; Schema: public; Owner: fhca
+--
+
+CREATE SEQUENCE carrera_colegio_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE carrera_colegio_seq OWNER TO fhca;
+
+--
+-- Name: carrera_colegio_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: fhca
+--
+
+ALTER SEQUENCE carrera_colegio_seq OWNED BY carrera.colegio;
+
+
+--
+-- Name: carrera_id_seq; Type: SEQUENCE; Schema: public; Owner: fhca
+--
+
+CREATE SEQUENCE carrera_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE carrera_id_seq OWNER TO fhca;
+
+--
+-- Name: carrera_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: fhca
+--
+
+ALTER SEQUENCE carrera_id_seq OWNED BY carrera.id;
+
+
+--
+-- Name: carrera_plantel_seq; Type: SEQUENCE; Schema: public; Owner: fhca
+--
+
+CREATE SEQUENCE carrera_plantel_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE carrera_plantel_seq OWNER TO fhca;
+
+--
+-- Name: carrera_plantel_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: fhca
+--
+
+ALTER SEQUENCE carrera_plantel_seq OWNED BY carrera.plantel;
+
+
+--
+-- Name: colegio; Type: TABLE; Schema: public; Owner: fhca
+--
+
+CREATE TABLE colegio (
+    nombre character varying(200),
+    id integer NOT NULL
+);
+
+
+ALTER TABLE colegio OWNER TO fhca;
+
+--
+-- Name: colegio_id_seq; Type: SEQUENCE; Schema: public; Owner: fhca
+--
+
+CREATE SEQUENCE colegio_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE colegio_id_seq OWNER TO fhca;
+
+--
+-- Name: colegio_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: fhca
+--
+
+ALTER SEQUENCE colegio_id_seq OWNED BY colegio.id;
+
+
+--
+-- Name: cursa; Type: TABLE; Schema: public; Owner: fhca
+--
+
+CREATE TABLE cursa (
+    id integer NOT NULL,
+    estudiante character varying(12),
+    materialplan integer NOT NULL
+);
+
+
+ALTER TABLE cursa OWNER TO fhca;
+
+--
+-- Name: cursa_id_seq; Type: SEQUENCE; Schema: public; Owner: fhca
+--
+
+CREATE SEQUENCE cursa_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cursa_id_seq OWNER TO fhca;
+
+--
+-- Name: cursa_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: fhca
+--
+
+ALTER SEQUENCE cursa_id_seq OWNED BY cursa.id;
+
+
+--
+-- Name: cursa_materialplan_seq; Type: SEQUENCE; Schema: public; Owner: fhca
+--
+
+CREATE SEQUENCE cursa_materialplan_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cursa_materialplan_seq OWNER TO fhca;
+
+--
+-- Name: cursa_materialplan_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: fhca
+--
+
+ALTER SEQUENCE cursa_materialplan_seq OWNED BY cursa.materialplan;
+
+
+--
+-- Name: estudiante; Type: TABLE; Schema: public; Owner: fhca
+--
+
+CREATE TABLE estudiante (
+    nombre character varying(200),
+    matricula character varying(12) NOT NULL
+);
+
+
+ALTER TABLE estudiante OWNER TO fhca;
+
+--
+-- Name: materia; Type: TABLE; Schema: public; Owner: fhca
+--
+
+CREATE TABLE materia (
+    nombre character varying(200),
+    semestre integer,
+    id integer NOT NULL
+);
+
+
+ALTER TABLE materia OWNER TO fhca;
+
+--
+-- Name: materia_id_seq; Type: SEQUENCE; Schema: public; Owner: fhca
+--
+
+CREATE SEQUENCE materia_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE materia_id_seq OWNER TO fhca;
+
+--
+-- Name: materia_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: fhca
+--
+
+ALTER SEQUENCE materia_id_seq OWNED BY materia.id;
+
+
+--
+-- Name: plan; Type: TABLE; Schema: public; Owner: fhca
+--
+
+CREATE TABLE plan (
+    id integer NOT NULL,
+    carrera integer NOT NULL,
+    materia integer NOT NULL
+);
+
+
+ALTER TABLE plan OWNER TO fhca;
+
+--
+-- Name: plan_carrera_seq; Type: SEQUENCE; Schema: public; Owner: fhca
+--
+
+CREATE SEQUENCE plan_carrera_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE plan_carrera_seq OWNER TO fhca;
+
+--
+-- Name: plan_carrera_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: fhca
+--
+
+ALTER SEQUENCE plan_carrera_seq OWNED BY plan.carrera;
+
+
+--
+-- Name: plan_id_seq; Type: SEQUENCE; Schema: public; Owner: fhca
+--
+
+CREATE SEQUENCE plan_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE plan_id_seq OWNER TO fhca;
+
+--
+-- Name: plan_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: fhca
+--
+
+ALTER SEQUENCE plan_id_seq OWNED BY plan.id;
+
+
+--
+-- Name: plan_materia_seq; Type: SEQUENCE; Schema: public; Owner: fhca
+--
+
+CREATE SEQUENCE plan_materia_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE plan_materia_seq OWNER TO fhca;
+
+--
+-- Name: plan_materia_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: fhca
+--
+
+ALTER SEQUENCE plan_materia_seq OWNED BY plan.materia;
+
+
+--
+-- Name: plantel; Type: TABLE; Schema: public; Owner: fhca
+--
+
+CREATE TABLE plantel (
+    nombre character varying(200),
+    id integer NOT NULL
+);
+
+
+ALTER TABLE plantel OWNER TO fhca;
+
+--
+-- Name: plantel_id_seq; Type: SEQUENCE; Schema: public; Owner: fhca
+--
+
+CREATE SEQUENCE plantel_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE plantel_id_seq OWNER TO fhca;
+
+--
+-- Name: plantel_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: fhca
+--
+
+ALTER SEQUENCE plantel_id_seq OWNED BY plantel.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY carrera ALTER COLUMN id SET DEFAULT nextval('carrera_id_seq'::regclass);
+
+
+--
+-- Name: colegio; Type: DEFAULT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY carrera ALTER COLUMN colegio SET DEFAULT nextval('carrera_colegio_seq'::regclass);
+
+
+--
+-- Name: plantel; Type: DEFAULT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY carrera ALTER COLUMN plantel SET DEFAULT nextval('carrera_plantel_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY colegio ALTER COLUMN id SET DEFAULT nextval('colegio_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY cursa ALTER COLUMN id SET DEFAULT nextval('cursa_id_seq'::regclass);
+
+
+--
+-- Name: materialplan; Type: DEFAULT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY cursa ALTER COLUMN materialplan SET DEFAULT nextval('cursa_materialplan_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY materia ALTER COLUMN id SET DEFAULT nextval('materia_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY plan ALTER COLUMN id SET DEFAULT nextval('plan_id_seq'::regclass);
+
+
+--
+-- Name: carrera; Type: DEFAULT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY plan ALTER COLUMN carrera SET DEFAULT nextval('plan_carrera_seq'::regclass);
+
+
+--
+-- Name: materia; Type: DEFAULT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY plan ALTER COLUMN materia SET DEFAULT nextval('plan_materia_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY plantel ALTER COLUMN id SET DEFAULT nextval('plantel_id_seq'::regclass);
+
+
+--
+-- Data for Name: carrera; Type: TABLE DATA; Schema: public; Owner: fhca
+--
+
+COPY carrera (id, nombre, colegio, plantel) FROM stdin;
+\.
+
+
+--
+-- Name: carrera_colegio_seq; Type: SEQUENCE SET; Schema: public; Owner: fhca
+--
+
+SELECT pg_catalog.setval('carrera_colegio_seq', 1, false);
+
+
+--
+-- Name: carrera_id_seq; Type: SEQUENCE SET; Schema: public; Owner: fhca
+--
+
+SELECT pg_catalog.setval('carrera_id_seq', 1, false);
+
+
+--
+-- Name: carrera_plantel_seq; Type: SEQUENCE SET; Schema: public; Owner: fhca
+--
+
+SELECT pg_catalog.setval('carrera_plantel_seq', 1, false);
+
+
+--
+-- Data for Name: colegio; Type: TABLE DATA; Schema: public; Owner: fhca
+--
+
+COPY colegio (nombre, id) FROM stdin;
+\.
+
+
+--
+-- Name: colegio_id_seq; Type: SEQUENCE SET; Schema: public; Owner: fhca
+--
+
+SELECT pg_catalog.setval('colegio_id_seq', 1, false);
+
+
+--
+-- Data for Name: cursa; Type: TABLE DATA; Schema: public; Owner: fhca
+--
+
+COPY cursa (id, estudiante, materialplan) FROM stdin;
+\.
+
+
+--
+-- Name: cursa_id_seq; Type: SEQUENCE SET; Schema: public; Owner: fhca
+--
+
+SELECT pg_catalog.setval('cursa_id_seq', 1, false);
+
+
+--
+-- Name: cursa_materialplan_seq; Type: SEQUENCE SET; Schema: public; Owner: fhca
+--
+
+SELECT pg_catalog.setval('cursa_materialplan_seq', 1, false);
+
+
+--
+-- Data for Name: estudiante; Type: TABLE DATA; Schema: public; Owner: fhca
+--
+
+COPY estudiante (nombre, matricula) FROM stdin;
+\.
+
+
+--
+-- Data for Name: materia; Type: TABLE DATA; Schema: public; Owner: fhca
+--
+
+COPY materia (nombre, semestre, id) FROM stdin;
+\.
+
+
+--
+-- Name: materia_id_seq; Type: SEQUENCE SET; Schema: public; Owner: fhca
+--
+
+SELECT pg_catalog.setval('materia_id_seq', 1, false);
+
+
+--
+-- Data for Name: plan; Type: TABLE DATA; Schema: public; Owner: fhca
+--
+
+COPY plan (id, carrera, materia) FROM stdin;
+\.
+
+
+--
+-- Name: plan_carrera_seq; Type: SEQUENCE SET; Schema: public; Owner: fhca
+--
+
+SELECT pg_catalog.setval('plan_carrera_seq', 1, false);
+
+
+--
+-- Name: plan_id_seq; Type: SEQUENCE SET; Schema: public; Owner: fhca
+--
+
+SELECT pg_catalog.setval('plan_id_seq', 1, false);
+
+
+--
+-- Name: plan_materia_seq; Type: SEQUENCE SET; Schema: public; Owner: fhca
+--
+
+SELECT pg_catalog.setval('plan_materia_seq', 1, false);
+
+
+--
+-- Data for Name: plantel; Type: TABLE DATA; Schema: public; Owner: fhca
+--
+
+COPY plantel (nombre, id) FROM stdin;
+\.
+
+
+--
+-- Name: plantel_id_seq; Type: SEQUENCE SET; Schema: public; Owner: fhca
+--
+
+SELECT pg_catalog.setval('plantel_id_seq', 1, false);
+
+
+--
+-- Name: carrera_pkey; Type: CONSTRAINT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY carrera
+    ADD CONSTRAINT carrera_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: colegio_pkey; Type: CONSTRAINT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY colegio
+    ADD CONSTRAINT colegio_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cursa_pkey; Type: CONSTRAINT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY cursa
+    ADD CONSTRAINT cursa_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: estudiante_pkey; Type: CONSTRAINT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY estudiante
+    ADD CONSTRAINT estudiante_pkey PRIMARY KEY (matricula);
+
+
+--
+-- Name: materia_pkey; Type: CONSTRAINT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY materia
+    ADD CONSTRAINT materia_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: plan_pkey; Type: CONSTRAINT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY plan
+    ADD CONSTRAINT plan_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: plantel_pkey; Type: CONSTRAINT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY plantel
+    ADD CONSTRAINT plantel_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: carrera_colegio_fkey; Type: FK CONSTRAINT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY carrera
+    ADD CONSTRAINT carrera_colegio_fkey FOREIGN KEY (colegio) REFERENCES colegio(id);
+
+
+--
+-- Name: carrera_plantel_fkey; Type: FK CONSTRAINT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY carrera
+    ADD CONSTRAINT carrera_plantel_fkey FOREIGN KEY (plantel) REFERENCES plantel(id);
+
+
+--
+-- Name: cursa_estudiante_fkey; Type: FK CONSTRAINT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY cursa
+    ADD CONSTRAINT cursa_estudiante_fkey FOREIGN KEY (estudiante) REFERENCES estudiante(matricula);
+
+
+--
+-- Name: cursa_materialplan_fkey; Type: FK CONSTRAINT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY cursa
+    ADD CONSTRAINT cursa_materialplan_fkey FOREIGN KEY (materialplan) REFERENCES plan(id);
+
+
+--
+-- Name: plan_carrera_fkey; Type: FK CONSTRAINT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY plan
+    ADD CONSTRAINT plan_carrera_fkey FOREIGN KEY (carrera) REFERENCES carrera(id);
+
+
+--
+-- Name: plan_materia_fkey; Type: FK CONSTRAINT; Schema: public; Owner: fhca
+--
+
+ALTER TABLE ONLY plan
+    ADD CONSTRAINT plan_materia_fkey FOREIGN KEY (materia) REFERENCES materia(id);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: fhca
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM fhca;
+GRANT ALL ON SCHEMA public TO fhca;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
